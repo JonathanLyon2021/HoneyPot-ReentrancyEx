@@ -9,7 +9,7 @@ contract HoneyPot {
     }
 
     function withdraw() public {
-        require(baqlances[msg.sender] > 0);
+        require(balances[msg.sender] > 0);
 
         (bool success, ) = msg.sender.call{ value: balances[msg.sender] }("");
         if (!success){
