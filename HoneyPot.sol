@@ -16,4 +16,7 @@ contract HoneyPot {
         }
         balances[msg.sender]= 0;
     }
+    fallback() external {
+        revert();
+    }
 }
