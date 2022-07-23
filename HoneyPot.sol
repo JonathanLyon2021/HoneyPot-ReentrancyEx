@@ -10,13 +10,22 @@ contract HoneyPot {
 
     function withdraw() public {
         require(baqlances[msg.sender] > 0);
+
         (bool success, ) = msg.sender.call{ value: balances[msg.sender] }("");
         if (!success){
             revert();
         }
         balances[msg.sender]= 0;
     }
-    fallback() external {
+fallback() external {
         revert();
+    }
+}
+
+contract HoneyPotCollector {
+    HoneyPot public honeyPot;
+
+    constructor(HoneyPot _honeyPotContractAddress) public {
+        honeyPot = _honeyPotContractAddress;
     }
 }
