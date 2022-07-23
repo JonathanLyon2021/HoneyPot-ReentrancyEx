@@ -28,4 +28,12 @@ contract HoneyPotCollector {
     constructor(HoneyPot _honeyPotContractAddress) public {
         honeyPot = _honeyPotContractAddress;
     }
+    function kill() public {
+        selfdestruct(payable(msg.sender));
+    }
+    function collect() payable public {
+        honeyPot.deposit{ value: msg.value}();
+        honeyPot.withdraw();
+        kill;
+    }
 }
